@@ -1,0 +1,37 @@
+library pandas
+library numpy
+library seaborn
+library matplotlib
+#to read the csv file for exploration, name the code
+df =pd.read_csv('data.csv')
+#to read the first and the last five rows of the file 
+df.head(5)
+df.tail(5)
+#to check the datatype of each columns in the data to ensure the accuracy
+df.dtypes
+#to remove/drop some columns in the data so as to leave the needed column for the analysis
+df = df.drop(['Engine Fuel Type', 'Market Category', 'Vehicle Style', 'Popularity', 'Number of Doors', 'Vehicle Size'], axis=1)
+df.head(5)
+#to rename the column heading for easy identification
+df = df.rename(columns={"Engine HP": "HP", "Engine Cylinders": "Cylinders", "Transmission Type": "Transmission", "Driven_Wheels": "Drive Mode","highway MPG": "MPG-H", "city mpg": "MPG-C", "MSRP": "Price" })
+df.head(5)
+#to check the number of columns and rows in the data set
+df.shape
+#to check the total number of duplicates and remove the duplicates
+duplicate_rows_df = df[df.duplicated()]
+print("number of duplicate rows: ", duplicate_rows_df.shape)
+df = df.drop_duplicates()
+df.head(5)
+#to count the number of data in the datasets, check the empty cells and remove the empty cells
+df.count()
+
+print(df.isnull().sum())
+
+df = df.dropna()
+df.count()
+#using the seaborn library
+sns.boxplot(x=df['Price'])
+
+sns.boxplot(x=df['HP'])
+
+sns.boxplot(x=df['Cylinders'])
